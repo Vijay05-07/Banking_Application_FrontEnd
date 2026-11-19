@@ -1,0 +1,316 @@
+
+/* NAVBAR */
+
+.navbar {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #f0edf7;
+}
+
+.navbarContainer {
+    width: 100%;
+    min-height: 80px;
+    padding: 0 clamp(24px, 4vw, 72px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    width: 220px;
+    height: 64px;
+}
+
+.logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* DESKTOP NAVIGATION */
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navLinks a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: #343044;
+    font-size: 15px;
+    font-weight: 500;
+
+    padding: 8px 0;
+    transition: color 0.3s ease;
+}
+
+/* UNDERLINE ANIMATION */
+
+.navLinks a::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background: #7047d2;
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    transition: transform 0.3s ease;
+}
+
+/* HOVER AND ACTIVE */
+
+.navLinks a:hover,
+.navLinks a.active {
+    color: #7047d2;
+}
+
+.navLinks a:hover::after,
+.navLinks a.active::after {
+    transform: scaleX(1);
+}
+
+/* DESKTOP BUTTONS */
+
+.navButtons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.loginBtn,
+.registerBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.loginBtn {
+    color: #7047d2;
+    padding: 11px 22px;
+    border: 1px solid #7047d2;
+    border-radius: 6px;
+}
+
+.loginBtn:hover {
+    background: #f3efff;
+}
+
+.registerBtn {
+    color: #ffffff;
+    background: #7047d2;
+    padding: 12px 22px;
+    border-radius: 6px;
+}
+
+.registerBtn:hover {
+    background: #5834b2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(112, 71, 210, 0.2);
+}
+
+/* MOBILE MENU BUTTON */
+
+.mobileMenuBtn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    background: transparent;
+    color: #24164e;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.logo:focus-visible,
+.navLinks a:focus-visible,
+.navButtons a:focus-visible,
+.mobileMenuBtn:focus-visible,
+.mobileNavLinks a:focus-visible,
+.mobileNavButtons a:focus-visible {
+    outline: 3px solid #7047d2;
+    outline-offset: 3px;
+}
+
+.mobileMenuBtn:focus-visible {
+    border-radius: 6px;
+}
+
+/* MOBILE NAVIGATION */
+
+.mobileNavigation {
+    display: none;
+    overflow: hidden;
+    background: #ffffff;
+    border-top: 1px solid #eeeaf6;
+}
+
+.mobileNavLinks {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 25px;
+}
+
+.mobileNavLinks a {
+    padding: 15px 5px;
+
+    text-decoration: none;
+    color: #343044;
+    font-size: 15px;
+    font-weight: 500;
+
+    border-bottom: 1px solid #f0edf7;
+    transition: color 0.25s ease;
+}
+
+.mobileNavLinks a:hover,
+.mobileNavLinks a.active {
+    color: #7047d2;
+}
+
+/* MOBILE BUTTONS */
+
+.mobileNavButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px 25px 22px;
+}
+
+.mobileLoginBtn,
+.mobileRegisterBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px;
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.mobileLoginBtn {
+    color: #7047d2;
+    border: 1px solid #7047d2;
+}
+
+.mobileRegisterBtn {
+    color: #ffffff;
+    background: #7047d2;
+}
+
+/* TABLET */
+
+@media (max-width: 1050px) {
+    .navbarContainer {
+        padding: 0 clamp(24px, 5vw, 52px);
+    }
+
+    .navLinks {
+        gap: 20px;
+    }
+
+    .navButtons {
+        gap: 8px;
+    }
+
+    .loginBtn,
+    .registerBtn {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+    .navbarContainer {
+        min-height: 72px;
+        padding: 0 22px;
+    }
+
+    .navLinks,
+    .navButtons {
+        display: none;
+    }
+
+    .mobileMenuBtn {
+        display: flex;
+    }
+
+    .mobileNavigation {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+        box-shadow: 0 12px 24px rgba(36, 22, 78, 0.12);
+    }
+
+    .logo {
+        width: 190px;
+        height: 58px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 400px) {
+    .navbarContainer {
+        padding: 0 16px;
+        min-height: 68px;
+    }
+
+    .logo {
+        width: 165px;
+        height: 50px;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar *,
+    .navbar *::before,
+    .navbar *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

@@ -1,0 +1,238 @@
+
+.footer {
+    --footer-bg: #10264b;
+    --footer-text: #d4deed;
+    --footer-muted: #a8b8d0;
+    --footer-accent: #7da9ff;
+
+    width: 100%;
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    font-family: "DM Sans", sans-serif;
+}
+
+.footerContainer {
+    width: min(1400px, 90%);
+    margin: 0 auto;
+    padding: 65px 0 25px;
+}
+
+/* Main Footer */
+
+.footerMain {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    padding-bottom: 55px;
+}
+
+/* Brand Section */
+
+.footerBrand {
+    max-width: 350px;
+}
+
+.footerLogo {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.footerLogoIcon {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--footer-bg);
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.footerBrand p {
+    margin: 20px 0;
+    color: var(--footer-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Security Note */
+
+.footerSecurity {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #dce8fa;
+    font-size: 13px;
+}
+
+.footerSecurity svg {
+    color: var(--footer-accent);
+}
+
+/* Social Media Links */
+
+.socialLinks {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.socialLink {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.socialLink:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    color: var(--footer-bg);
+    transform: translateY(-3px);
+}
+
+/* Footer Navigation */
+
+.footerLinks {
+    display: flex;
+    justify-content: space-between;
+    gap: 65px;
+}
+
+.footerColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 130px;
+}
+
+.footerColumn h3 {
+    margin: 5px 0 8px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.footerColumn a {
+    width: fit-content;
+    color: var(--footer-muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
+
+.footerColumn a:hover {
+    color: #ffffff;
+}
+
+/* Bottom Section */
+
+.footerBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footerBottom p {
+    margin: 0;
+    color: var(--footer-muted);
+    font-size: 12px;
+}
+
+.footerBackTop {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+
+    transition: color 0.2s ease;
+}
+
+.footerBackTop:hover {
+    color: var(--footer-accent);
+}
+
+.footer a:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+.socialLink:focus-visible {
+    border-radius: 50%;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+    .footerMain {
+        flex-direction: column;
+        gap: 45px;
+    }
+
+    .footerBrand {
+        max-width: 450px;
+    }
+
+    .footerLinks {
+        justify-content: flex-start;
+        gap: 70px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .footerContainer {
+        width: 88%;
+        padding-top: 50px;
+    }
+
+    .footerLinks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 35px 25px;
+    }
+
+    .footerBottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* Small Mobile */
+
+@media (max-width: 360px) {
+    .footerLinks {
+        grid-template-columns: 1fr;
+    }
+}
