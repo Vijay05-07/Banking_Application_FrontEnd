@@ -138,7 +138,8 @@ function Home() {
                 className={styles.heroContent}
                 variants={staggerContainer}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
               >
                 <motion.div className={styles.heroBadge} variants={fadeUp}>
                   <span className={styles.badgeDot} />
@@ -190,7 +191,8 @@ function Home() {
               <motion.div
                 className={styles.heroVisual}
                 initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.3 }}
                 transition={{
                   duration: 0.8,
                   delay: 0.3,
@@ -200,10 +202,11 @@ function Home() {
                 <div className={styles.visualGlow} />
 
                 <motion.div
-                  className={styles.floatingLabel + " " + styles.labelTop}
+                  className={`${styles.floatingLabel} ${styles.labelTop}`}
                   initial={{ opacity: 0, x: 25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
                 >
                   <div className={styles.floatingIcon}>
                     <ArrowDownLeft size={19} />
@@ -219,7 +222,11 @@ function Home() {
                   <div className={styles.previewHeader}>
                     <div className={styles.previewBrand}>
                       {/* <div className={styles.previewLogo}>O</div> */}
-                      <img src="public\favicon.png" className={styles.previewLogo} alt="OrvexaBank Logo" />
+                      <img
+                        src="public/favicon.png"
+                        className={styles.previewLogo}
+                        alt="OrvexaBank Logo"
+                      />
                       <strong>OrvexaBank</strong>
                     </div>
                     <div className={styles.previewNotification}>
@@ -242,7 +249,9 @@ function Home() {
                         <Wallet size={19} />
                       </div>
                     </div>
-                    <div className={styles.previewBalanceAmount}>₹2,00,000.00</div>
+                    <div className={styles.previewBalanceAmount}>
+                      ₹2,00,000.00
+                    </div>
                     <div className={styles.balanceFooter}>
                       <span>Across 3 active accounts</span>
                     </div>
@@ -327,7 +336,9 @@ function Home() {
                     </div>
 
                     <div className={styles.activityRow}>
-                      <div className={`${styles.activityIcon} ${styles.income}`}>
+                      <div
+                        className={`${styles.activityIcon} ${styles.income}`}
+                      >
                         <ArrowDownLeft size={17} />
                       </div>
                       <div className={styles.activityDetails}>
@@ -338,7 +349,9 @@ function Home() {
                     </div>
 
                     <div className={styles.activityRow}>
-                      <div className={styles.activityIcon + " " + styles.expense}>
+                      <div
+                        className={styles.activityIcon + " " + styles.expense}
+                      >
                         <ArrowUpRight size={17} />
                       </div>
                       <div className={styles.activityDetails}>
@@ -356,7 +369,11 @@ function Home() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 1 }}
                 >
-                  <div className={styles.floatingIcon + " " + styles.securityFloating}>
+                  <div
+                    className={
+                      styles.floatingIcon + " " + styles.securityFloating
+                    }
+                  >
                     <ShieldCheck size={21} />
                   </div>
                   <div>
@@ -381,7 +398,7 @@ function Home() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: false, amount: 0.3 }}
               >
                 <span className={styles.sectionEyebrow}>BANKING SERVICES</span>
                 <h2 id="services-heading">
@@ -400,14 +417,14 @@ function Home() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.15 }}
+                viewport={{ once: false, amount: 0.15 }}
               >
                 {services.map((service) => {
                   const Icon = service.icon;
 
                   return (
                     <motion.article
-                      className={styles.serviceCard}  
+                      className={styles.serviceCard}
                       key={service.title}
                       variants={cardAnimation}
                       whileHover={{
@@ -445,7 +462,7 @@ function Home() {
                 className={styles.whyVisual}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: false, amount: 0.3 }}
                 variants={fadeUp}
               >
                 <div className={styles.whyCard}>
@@ -483,9 +500,12 @@ function Home() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: false, amount: 0.3 }}
               >
-                <motion.span className={styles.sectionEyebrow} variants={fadeUp}>
+                <motion.span
+                  className={styles.sectionEyebrow}
+                  variants={fadeUp}
+                >
                   WHY ORVEXABANK
                 </motion.span>
 
@@ -534,14 +554,16 @@ function Home() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.3 }}
             >
               <motion.div className={styles.securityIcon} variants={fadeUp}>
                 <ShieldCheck size={34} />
               </motion.div>
 
               <motion.div variants={fadeUp}>
-                <span className={styles.sectionEyebrow}>SECURITY AND CONTROL</span>
+                <span className={styles.sectionEyebrow}>
+                  SECURITY AND CONTROL
+                </span>
                 <h2>Your banking experience deserves protection.</h2>
                 <p>
                   Access your account through authenticated sessions and stay
@@ -574,7 +596,7 @@ function Home() {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.4 }}
+              viewport={{ once: false, amount: 0.4 }}
             >
               <motion.span variants={fadeUp}>
                 YOUR NEXT CHAPTER STARTS HERE
@@ -592,7 +614,7 @@ function Home() {
               </motion.p>
 
               <motion.div variants={fadeUp}>
-                <Link to="/register" className={styles.ctaButton} >
+                <Link to="/register" className={styles.ctaButton}>
                   Open Your Account
                   <ArrowRight size={18} />
                 </Link>
@@ -601,11 +623,10 @@ function Home() {
           </section>
         </main>
 
-       <Footer/>
+        <Footer />
       </div>
     </MotionConfig>
   );
 }
- 
 
 export default Home;

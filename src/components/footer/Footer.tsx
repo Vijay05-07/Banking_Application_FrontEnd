@@ -54,7 +54,7 @@ function Footer() {
         : {
               initial: "hidden" as const,
               whileInView: "visible" as const,
-              viewport: { once: true, amount: 0.15 },
+              viewport: { once: false, amount: 0.15 },
               variants: footerVariants,
           };
 
@@ -71,7 +71,7 @@ function Footer() {
 
                         <Link to="/" className={styles.footerLogo}>
                             {/* <span className={styles.footerLogoIcon}>O</span> */}
-                            <img src="public\favicon.png" className={styles.footerLogoIcon} alt="OrvexaBank Logo" />
+                            <img src="public/favicon.png" className={styles.footerLogoIcon} alt="OrvexaBank Logo" />
                             <span>OrvexaBank</span>
                         </Link>
 
@@ -158,7 +158,7 @@ function Footer() {
                     whileInView={
                         shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
                     }
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                 >
 

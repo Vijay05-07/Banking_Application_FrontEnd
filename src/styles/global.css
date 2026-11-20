@@ -1,0 +1,17 @@
+::root {
+  --navy: #10264b;
+  --blue: #2455a6;
+  --blue-light: #edf3ff;
+  --text: #192943;
+  --muted: #586579;
+  --background: #f7f9fc;
+  --white: #ffffff;
+  --border: #e9edf4;
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    color: var(--dark-navy);
+    background: #ffffff;
+}
