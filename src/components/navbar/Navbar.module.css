@@ -7,9 +7,18 @@
     top: 0;
     z-index: 1000;
 
+    --navy: #10264b;
+    --blue: #2455a6;
+    --blue-hover: #1b4388;
+    --blue-light: #edf3ff;
+    --text: #192943;
+    --muted: #586579;
+    --white: #ffffff;
+    --border: #e9edf4;
+
     background: rgba(255, 255, 255, 0.97);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid #f0edf7;
+    border-bottom: 1px solid var(--border);
 }
 
 .navbarContainer {
@@ -53,7 +62,7 @@
     align-items: center;
 
     text-decoration: none;
-    color: #343044;
+    color: var(--text);
     font-size: 15px;
     font-weight: 500;
 
@@ -73,7 +82,9 @@
     width: 100%;
     height: 2px;
 
-    background: #7047d2;
+     background:
+        radial-gradient(circle at 100% 0, #ffffff20, transparent 38%),
+        linear-gradient(135deg, #10264b, #2864b7);
 
     transform: scaleX(0);
     transform-origin: center;
@@ -85,7 +96,7 @@
 
 .navLinks a:hover,
 .navLinks a.active {
-    color: #7047d2;
+    color: var(--blue);
 }
 
 .navLinks a:hover::after,
@@ -116,27 +127,34 @@
 }
 
 .loginBtn {
-    color: #7047d2;
+    color: var(--blue);
     padding: 11px 22px;
-    border: 1px solid #7047d2;
+    border: 1px solid var(--blue);
     border-radius: 6px;
 }
 
 .loginBtn:hover {
-    background: #f3efff;
+    color: var(--blue-hover);
+    background: var(--blue-light);
+    border-color: var(--blue-hover);
+    transform: translateY(-2px);
 }
 
 .registerBtn {
-    color: #ffffff;
-    background: #7047d2;
+    color: var(--white);
+     background:
+        radial-gradient(circle at 100% 0, #ffffff20, transparent 38%),
+        linear-gradient(135deg, #10264b, #2864b7);
     padding: 12px 22px;
+    border: 1px solid var(--blue);
     border-radius: 6px;
 }
 
 .registerBtn:hover {
-    background: #5834b2;
+     background: linear-gradient(135deg, #1b4388, #2455a6);
+    border-color: var(--blue-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(112, 71, 210, 0.2);
+    box-shadow: 0 6px 15px rgba(36, 85, 166, 0.2);
 }
 
 /* MOBILE MENU BUTTON */
@@ -148,10 +166,12 @@
 
     border: none;
     background: transparent;
-    color: #24164e;
+    color: var(--navy);
     cursor: pointer;
     padding: 7px;
 }
+
+/* KEYBOARD ACCESSIBILITY */
 
 .logo:focus-visible,
 .navLinks a:focus-visible,
@@ -159,7 +179,7 @@
 .mobileMenuBtn:focus-visible,
 .mobileNavLinks a:focus-visible,
 .mobileNavButtons a:focus-visible {
-    outline: 3px solid #7047d2;
+    outline: 3px solid var(--blue);
     outline-offset: 3px;
 }
 
@@ -171,9 +191,8 @@
 
 .mobileNavigation {
     display: none;
-    overflow: hidden;
-    background: #ffffff;
-    border-top: 1px solid #eeeaf6;
+    background: var(--white);
+    border-top: 1px solid var(--border);
 }
 
 .mobileNavLinks {
@@ -186,17 +205,17 @@
     padding: 15px 5px;
 
     text-decoration: none;
-    color: #343044;
+    color: var(--text);
     font-size: 15px;
     font-weight: 500;
 
-    border-bottom: 1px solid #f0edf7;
+    border-bottom: 1px solid var(--border);
     transition: color 0.25s ease;
 }
 
 .mobileNavLinks a:hover,
 .mobileNavLinks a.active {
-    color: #7047d2;
+    color: var(--blue);
 }
 
 /* MOBILE BUTTONS */
@@ -221,16 +240,33 @@
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
+
+    transition: all 0.25s ease;
 }
 
 .mobileLoginBtn {
-    color: #7047d2;
-    border: 1px solid #7047d2;
+    color: var(--blue);
+    background: var(--white);
+    border: 1px solid var(--blue);
+}
+
+.mobileLoginBtn:hover {
+    color: var(--blue-hover);
+    background: var(--blue-light);
+    border-color: var(--blue-hover);
 }
 
 .mobileRegisterBtn {
-    color: #ffffff;
-    background: #7047d2;
+    color: var(--white);
+    background: var(--blue);
+    border: 1px solid var(--blue);
+}
+
+.mobileRegisterBtn:hover {
+    background: var(--blue-hover);
+    border-color: var(--blue-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 7px 17px rgba(36, 85, 166, 0.22);
 }
 
 /* TABLET */
@@ -260,7 +296,13 @@
 @media (max-width: 760px) {
     .navbarContainer {
         min-height: 72px;
-        padding: 0 22px;
+        padding: 0 20px;
+        gap: 12px;
+    }
+
+    .logo {
+        width: 175px;
+        height: 58px;
     }
 
     .navLinks,
@@ -268,24 +310,189 @@
         display: none;
     }
 
+    /* MOBILE MENU BUTTON */
+
     .mobileMenuBtn {
-        display: flex;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        width: 44px;
+        height: 44px;
+
+        color: var(--navy);
+        background: #f7f9fc;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+
+        cursor: pointer;
+        transition: all 0.25s ease;
     }
 
+    .mobileMenuBtn:hover {
+        color: var(--blue);
+        background: var(--blue-light);
+        border-color: #cbdaf5;
+    }
+
+    /* MOBILE DROPDOWN */
+
     .mobileNavigation {
-        display: block;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+
         max-height: calc(100vh - 72px);
+        max-height: calc(100dvh - 72px);
+
         overflow-y: auto;
-        box-shadow: 0 12px 24px rgba(36, 22, 78, 0.12);
+        overscroll-behavior-y: contain;
+        -webkit-overflow-scrolling: touch;
+
+        padding: 20px 22px 24px;
+
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+
+        box-shadow: 0 14px 30px rgba(16, 38, 75, 0.12);
     }
 
-    .logo {
-        width: 190px;
-        height: 58px;
+    /* MOBILE NAVIGATION LINKS */
+
+    .mobileNavLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 0;
+    }
+
+    .mobileNavLinks a {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+
+        min-height: 49px;
+        padding: 0 16px;
+
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+
+        border: none;
+        border-radius: 8px;
+
+        transition:
+            color 0.2s ease,
+            background-color 0.2s ease;
+    }
+
+    .mobileNavLinks a:hover {
+        color: var(--blue);
+        background: #f5f8fe;
+    }
+
+    /* ACTIVE NAVIGATION LINK */
+
+    .mobileNavLinks a.active {
+        color: var(--blue);
+        background: var(--blue-light);
+    }
+
+    .mobileNavLinks a.active::before {
+        content: "";
+
+        position: absolute;
+        left: 0;
+        top: 11px;
+        bottom: 11px;
+
+        width: 3px;
+
+        background: var(--blue);
+        border-radius: 0 4px 4px 0;
+    }
+
+    /* LOGIN AND REGISTER BUTTONS */
+
+    .mobileNavButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+
+        padding: 18px 0 0;
+        border-top: 1px solid var(--border);
+    }
+
+    .mobileLoginBtn,
+    .mobileRegisterBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+
+        width: 100%;
+        min-height: 48px;
+        padding: 0 18px;
+
+        border-radius: 8px;
+
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+
+        transition:
+            color 0.25s ease,
+            background-color 0.25s ease,
+            border-color 0.25s ease,
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    /* MOBILE LOGIN */
+
+    .mobileLoginBtn {
+        color: var(--blue);
+        background: var(--white);
+        border: 1px solid var(--blue);
+    }
+
+    .mobileLoginBtn:hover {
+        color: var(--blue-hover);
+        background: var(--blue-light);
+        border-color: var(--blue-hover);
+    }
+
+    /* MOBILE REGISTER */
+
+    .mobileRegisterBtn {
+        color: var(--white);
+        background: var(--blue);
+        border: 1px solid var(--blue);
+        box-shadow: 0 5px 14px rgba(36, 85, 166, 0.16);
+    }
+
+    .mobileRegisterBtn:hover {
+        background: var(--blue-hover);
+        border-color: var(--blue-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 7px 17px rgba(36, 85, 166, 0.22);
+    }
+
+    .mobileRegisterBtn svg {
+        transition: transform 0.25s ease;
+    }
+
+    .mobileRegisterBtn:hover svg {
+        transform: translateX(3px);
     }
 }
 
@@ -294,12 +501,15 @@
 @media (max-width: 400px) {
     .navbarContainer {
         padding: 0 16px;
-        min-height: 68px;
     }
 
     .logo {
-        width: 165px;
-        height: 50px;
+        width: 155px;
+        height: 54px;
+    }
+
+    .mobileNavigation {
+        padding: 18px 16px 22px;
     }
 }
 

@@ -218,7 +218,8 @@ function Home() {
                 <div className={styles.previewDashboard}>
                   <div className={styles.previewHeader}>
                     <div className={styles.previewBrand}>
-                      <div className={styles.previewLogo}>O</div>
+                      {/* <div className={styles.previewLogo}>O</div> */}
+                      <img src="public\favicon.png" className={styles.previewLogo} alt="OrvexaBank Logo" />
                       <strong>OrvexaBank</strong>
                     </div>
                     <div className={styles.previewNotification}>

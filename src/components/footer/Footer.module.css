@@ -3,10 +3,18 @@
     --footer-bg: #10264b;
     --footer-text: #d4deed;
     --footer-muted: #a8b8d0;
+    --footer-blue: #2864b7;
     --footer-accent: #7da9ff;
 
     width: 100%;
-    background: var(--footer-bg);
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(40, 100, 183, 0.16),
+            transparent 35%
+        ),
+        linear-gradient(135deg, #10264b, #0b1c38);
+
     color: var(--footer-text);
     font-family: "DM Sans", sans-serif;
 }
@@ -36,6 +44,7 @@
     display: inline-flex;
     align-items: center;
     gap: 11px;
+
     color: #ffffff;
     text-decoration: none;
     font-size: 23px;
@@ -46,18 +55,33 @@
 .footerLogoIcon {
     width: 38px;
     height: 38px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 10px;
-    background: #ffffff;
-    color: var(--footer-bg);
+    background: linear-gradient(135deg, #10264b, #2864b7);
+
+    color: #ffffff;
     font-size: 22px;
     font-weight: 800;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.footerLogo:hover .footerLogoIcon {
+    transform: rotate(-8deg) scale(1.06);
+    box-shadow: 0 5px 20px rgba(40, 100, 183, 0.4);
 }
 
 .footerBrand p {
     margin: 20px 0;
+
     color: var(--footer-muted);
     font-size: 14px;
     line-height: 1.8;
@@ -69,6 +93,7 @@
     display: flex;
     align-items: center;
     gap: 9px;
+
     color: #dce8fa;
     font-size: 13px;
 }
@@ -89,6 +114,7 @@
 .socialLink {
     width: 44px;
     height: 44px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,6 +122,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
 
+    background: rgba(255, 255, 255, 0.04);
     color: #ffffff;
     text-decoration: none;
 
@@ -103,14 +130,15 @@
         background 0.25s ease,
         border-color 0.25s ease,
         color 0.25s ease,
-        transform 0.25s ease;
+        box-shadow 0.25s ease;
 }
 
 .socialLink:hover {
-    background: #ffffff;
-    border-color: #ffffff;
-    color: var(--footer-bg);
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, #10264b, #2864b7);
+    border-color: #7da9ff;
+    color: #ffffff;
+
+    box-shadow: 0 5px 18px rgba(40, 100, 183, 0.35);
 }
 
 /* Footer Navigation */
@@ -129,22 +157,44 @@
 }
 
 .footerColumn h3 {
+    position: relative;
+
     margin: 5px 0 8px;
+    padding-bottom: 10px;
+
     color: #ffffff;
     font-size: 15px;
     font-weight: 600;
 }
 
+.footerColumn h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 30px;
+    height: 2px;
+
+    border-radius: 2px;
+    background: linear-gradient(90deg, #2864b7, #7da9ff);
+}
+
 .footerColumn a {
     width: fit-content;
+
     color: var(--footer-muted);
     text-decoration: none;
     font-size: 13px;
-    transition: color 0.2s ease;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .footerColumn a:hover {
-    color: #ffffff;
+    color: #7da9ff;
+    transform: translateX(4px);
 }
 
 /* Bottom Section */
@@ -174,20 +224,21 @@
     text-decoration: none;
     font-size: 13px;
 
-    transition: color 0.2s ease;
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .footerBackTop:hover {
     color: var(--footer-accent);
+    transform: translateY(-3px);
 }
+
+/* Accessibility */
 
 .footer a:focus-visible {
-    outline: 3px solid #ffffff;
-    outline-offset: 3px;
-}
-
-.socialLink:focus-visible {
-    border-radius: 50%;
+    outline: 3px solid var(--footer-accent);
+    outline-offset: 4px;
 }
 
 /* Tablet */
@@ -234,5 +285,17 @@
 @media (max-width: 360px) {
     .footerLinks {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+    .footer *,
+    .footer *::before,
+    .footer *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
