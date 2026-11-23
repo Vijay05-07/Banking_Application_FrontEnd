@@ -104,12 +104,13 @@ const Register = () => {
 
   return (
     <div className={styles.registerPage}>
-      <motion.section
+      <motion.aside
         className={styles.formSection}
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, x: -25 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
       >
+        
         <div className={styles.formContainer}>
           <Link to="/" className={styles.logo}>
             <img src="/favicon.png" alt="OrvexaBank logo" />
@@ -316,9 +317,13 @@ const Register = () => {
             <span>Your information is protected with secure encryption.</span>
           </div>
         </div>
-      </motion.section>
+      </motion.aside>
 
-      <section className={styles.brandSection}>
+      <motion.aside 
+      initial={{ opacity: 0, x: 25 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className={styles.brandSection}>
         <div className={styles.brandContent}>
           <div className={styles.brandTop}>
             <div className={styles.brandIcon}>
@@ -374,7 +379,7 @@ const Register = () => {
             <span>Secure banking. Confident living.</span>
           </div>
         </div>
-      </section>
+      </motion.aside>
     </div>
   );
 };

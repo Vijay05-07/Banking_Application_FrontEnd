@@ -1,105 +1,74 @@
 import {
+  ArrowDownLeft,
   ArrowRight,
   ArrowUpRight,
-  ArrowDownLeft,
-  Wallet,
-  ShieldCheck,
   Bell,
-  CreditCard,
-  Clock3,
-  LockKeyhole,
-  ChartNoAxesCombined,
   CheckCircle2,
-  Smartphone,
+  Clock3,
+  CreditCard,
+  LockKeyhole,
+  ShieldCheck,
+  Wallet,
+  ChartNoAxesCombined,
   type LucideIcon,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
-import { motion, MotionConfig } from "motion/react";
-import Navbar from "../../components/navbar/Navbar";
-import styles from "./Home.module.css";
-import Footer from "../../components/footer/Footer";
+import { motion, MotionConfig, type Variants } from "motion/react";
 
-const services: {
+import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
+import styles from "./Home.module.css";
+
+type Service = {
   icon: LucideIcon;
   title: string;
   description: string;
-}[] = [
+};
+
+type PreviewAccount = {
+  type: string;
+  number: string;
+  balance: string;
+  icon: LucideIcon;
+  tone: "savings" | "current";
+};
+
+const services: Service[] = [
   {
     icon: Wallet,
-    title: "Smart Account Management",
+    title: "Account management",
     description:
-      "View your account information, monitor balances and manage your banking activities from one place.",
+      "View your account information, check balances and keep your banking activities organized in one place.",
   },
   {
     icon: ArrowUpRight,
-    title: "Easy Money Transfers",
+    title: "Simple money transfers",
     description:
-      "Move money with a simple and convenient digital transfer experience.",
+      "Move money through a straightforward digital transfer experience designed for everyday banking.",
   },
   {
     icon: ChartNoAxesCombined,
-    title: "Transaction Tracking",
+    title: "Transaction history",
     description:
-      "Keep track of deposits, withdrawals and transfers with organized transaction history.",
+      "Review deposits, withdrawals and transfers with a clear view of your recent account activity.",
   },
   {
     icon: Bell,
-    title: "Real-time Notifications",
+    title: "Timely notifications",
     description:
-      "Stay informed about account activities and important transaction updates.",
+      "Stay informed with updates about important account activities and transaction events.",
   },
 ];
 
-const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const cardAnimation = {
-  hidden: {
-    opacity: 0,
-    y: 35,
-    scale: 0.96,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  },
-};
-
-const features = [
-  "Simple digital banking experience",
-  "Convenient account management",
-  "Transaction activity tracking",
-  "Timely account notifications",
+const benefits = [
+  "A clear view of your financial activities",
+  "Convenient access to everyday banking",
+  "Organized account and transaction information",
+  "Timely updates about important activities",
 ];
 
-const previewAccounts = [
+const previewAccounts: PreviewAccount[] = [
   {
     type: "Savings Account",
     number: "1234",
@@ -123,6 +92,52 @@ const previewAccounts = [
   },
 ];
 
+const securityFeatures = [
+  {
+    icon: LockKeyhole,
+    title: "Secure authentication",
+    description:
+      "Authenticated sessions help protect access to customer accounts.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Account protection",
+    description:
+      "Account access and important actions are handled through controlled flows.",
+  },
+  {
+    icon: Bell,
+    title: "Activity notifications",
+    description:
+      "Stay aware of important account and transaction updates.",
+  },
+];
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const cardAnimation: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 function Home() {
   return (
     <MotionConfig reducedMotion="user">
@@ -130,8 +145,7 @@ function Home() {
         <Navbar />
 
         <main>
-          {/* HERO SECTION */}
-
+          {/* HERO */}
           <section className={styles.hero} id="home">
             <div className={styles.heroContainer}>
               <motion.div
@@ -139,11 +153,11 @@ function Home() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.25 }}
               >
                 <motion.div className={styles.heroBadge} variants={fadeUp}>
                   <span className={styles.badgeDot} />
-                  YOUR BANKING, REIMAGINED
+                  DIGITAL BANKING, MADE CLEARER
                 </motion.div>
 
                 <motion.h1 variants={fadeUp}>
@@ -152,68 +166,61 @@ function Home() {
                   <span>with your life.</span>
                 </motion.h1>
 
-                <motion.p className={styles.heroDescription} variants={fadeUp}>
-                  Experience a smarter way to manage your money. Access your
-                  accounts, make transfers and stay connected to your finances
-                  through one simple digital banking experience.
+                <motion.p
+                  className={styles.heroDescription}
+                  variants={fadeUp}
+                >
+                  A simpler way to stay connected to your money. View your
+                  accounts, manage transfers and keep track of your financial
+                  activity through one convenient digital banking experience.
                 </motion.p>
 
                 <motion.div className={styles.heroActions} variants={fadeUp}>
-                  <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-                    <Link to="/register" className={styles.primaryBtn}>
-                      Open an Account
-                      <ArrowRight size={18} />
-                    </Link>
-                  </motion.div>
+                  <Link to="/register" className={styles.primaryBtn}>
+                    Open an account
+                    <ArrowRight size={18} />
+                  </Link>
 
-                  <motion.div whileHover={{ y: -3 }} whileTap={{ scale: 0.97 }}>
-                    <Link to="/login" className={styles.secondaryBtn}>
-                      Sign In
-                    </Link>
-                  </motion.div>
+                  <Link to="/login" className={styles.secondaryBtn}>
+                    Sign in
+                  </Link>
                 </motion.div>
 
                 <motion.div className={styles.heroTrust} variants={fadeUp}>
                   <div className={styles.trustItem}>
-                    <ShieldCheck size={19} />
-                    <span>Security-conscious banking</span>
+                    <ShieldCheck size={18} />
+                    <span>Security-conscious access</span>
                   </div>
-
                   <div className={styles.trustItem}>
-                    <Clock3 size={19} />
+                    <Clock3 size={18} />
                     <span>Banking at your convenience</span>
                   </div>
                 </motion.div>
               </motion.div>
 
-              {/* BANKING DASHBOARD PREVIEW */}
-
+              {/* Product preview: illustrative data only */}
               <motion.div
                 className={styles.heroVisual}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.3,
-                  ease: "easeOut",
-                }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}
               >
-                <div className={styles.visualGlow} />
+                <div className={styles.visualGlow} aria-hidden="true" />
 
                 <motion.div
                   className={`${styles.floatingLabel} ${styles.labelTop}`}
-                  initial={{ opacity: 0, x: 25 }}
+                  initial={{ opacity: 0, x: 18 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: 0.45 }}
                 >
                   <div className={styles.floatingIcon}>
                     <ArrowDownLeft size={19} />
                   </div>
                   <div>
                     <strong>Money received</strong>
-                    <span>Transaction update</span>
+                    <span>Illustrative transaction</span>
                   </div>
                   <CheckCircle2 className={styles.successIcon} size={19} />
                 </motion.div>
@@ -221,22 +228,25 @@ function Home() {
                 <div className={styles.previewDashboard}>
                   <div className={styles.previewHeader}>
                     <div className={styles.previewBrand}>
-                      {/* <div className={styles.previewLogo}>O</div> */}
                       <img
-                        src="public/favicon.png"
+                        src="/favicon.png"
                         className={styles.previewLogo}
-                        alt="OrvexaBank Logo"
+                        alt=""
+                        aria-hidden="true"
                       />
                       <strong>OrvexaBank</strong>
                     </div>
-                    <div className={styles.previewNotification}>
+                    <div
+                      className={styles.previewNotification}
+                      aria-label="Sample notifications"
+                    >
                       <Bell size={17} />
                       <span />
                     </div>
                   </div>
 
                   <div className={styles.previewGreeting}>
-                    <span>SAMPLE DASHBOARD</span>
+                    <span>ILLUSTRATIVE DASHBOARD</span>
                     <div className={styles.previewGreetingTitle}>
                       Your finances, at a glance.
                     </div>
@@ -253,14 +263,15 @@ function Home() {
                       ₹2,00,000.00
                     </div>
                     <div className={styles.balanceFooter}>
-                      <span>Across 3 active accounts</span>
+                      <span>Across 3 sample accounts</span>
+                      <span className={styles.demoTag}>DEMO</span>
                     </div>
                   </div>
 
                   <div className={styles.previewAccounts}>
                     <div className={styles.previewSectionHeading}>
-                      <strong>My Accounts</strong>
-                      <span>3 ACTIVE</span>
+                      <strong>My accounts</strong>
+                      <span>3 SAMPLE</span>
                     </div>
 
                     <div className={styles.previewAccountList}>
@@ -269,9 +280,7 @@ function Home() {
 
                         return (
                           <div
-                            className={`${styles.previewAccount} ${
-                              account.tone === "current" ? styles.current : ""
-                            }`}
+                            className={styles.previewAccount}
                             key={account.number}
                           >
                             <div
@@ -283,10 +292,12 @@ function Home() {
                             >
                               <AccountIcon size={16} />
                             </div>
+
                             <div className={styles.previewAccountDetails}>
                               <strong>{account.type}</strong>
-                              <span>**** {account.number}</span>
+                              <span>•••• {account.number}</span>
                             </div>
+
                             <div className={styles.previewAccountBalance}>
                               <strong>{account.balance}</strong>
                               <span className={styles.activeStatus}>
@@ -308,21 +319,19 @@ function Home() {
                     <div className={styles.previewActions}>
                       <div>
                         <div className={styles.actionIcon}>
-                          <ArrowDownLeft />
+                          <ArrowDownLeft size={19} />
                         </div>
                         <span>Receive</span>
                       </div>
-
                       <div>
                         <div className={styles.actionIcon}>
-                          <ArrowUpRight />
+                          <ArrowUpRight size={19} />
                         </div>
                         <span>Transfer</span>
                       </div>
-
                       <div>
                         <div className={styles.actionIcon}>
-                          <CreditCard />
+                          <CreditCard size={19} />
                         </div>
                         <span>Accounts</span>
                       </div>
@@ -332,7 +341,7 @@ function Home() {
                   <div className={styles.previewActivity}>
                     <div className={styles.activityHeading}>
                       <strong>Recent activity</strong>
-                      <span>Sample</span>
+                      <span>Sample data</span>
                     </div>
 
                     <div className={styles.activityRow}>
@@ -350,7 +359,7 @@ function Home() {
 
                     <div className={styles.activityRow}>
                       <div
-                        className={styles.activityIcon + " " + styles.expense}
+                        className={`${styles.activityIcon} ${styles.expense}`}
                       >
                         <ArrowUpRight size={17} />
                       </div>
@@ -364,20 +373,19 @@ function Home() {
                 </div>
 
                 <motion.div
-                  className={styles.floatingLabel + " " + styles.labelBottom}
-                  initial={{ opacity: 0, x: -25 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 1 }}
+                  className={`${styles.floatingLabel} ${styles.labelBottom}`}
+                  initial={{ opacity: 0, x: -18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: 0.6 }}
                 >
                   <div
-                    className={
-                      styles.floatingIcon + " " + styles.securityFloating
-                    }
+                    className={`${styles.floatingIcon} ${styles.securityFloating}`}
                   >
                     <ShieldCheck size={21} />
                   </div>
                   <div>
-                    <strong>Your security matters</strong>
+                    <strong>Security matters</strong>
                     <span>Protected account access</span>
                   </div>
                 </motion.div>
@@ -386,7 +394,6 @@ function Home() {
           </section>
 
           {/* SERVICES */}
-
           <section
             className={styles.servicesSection}
             id="services"
@@ -398,17 +405,17 @@ function Home() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
               >
                 <span className={styles.sectionEyebrow}>BANKING SERVICES</span>
                 <h2 id="services-heading">
-                  Everything you need.
+                  Everyday banking.
                   <br />
                   <span>All in one place.</span>
                 </h2>
                 <p>
-                  Manage your everyday banking activities with convenient
-                  digital tools designed around you.
+                  The essential tools to help you manage your accounts and
+                  follow your financial activity with confidence.
                 </p>
               </motion.div>
 
@@ -417,7 +424,7 @@ function Home() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.12 }}
               >
                 {services.map((service) => {
                   const Icon = service.icon;
@@ -427,24 +434,15 @@ function Home() {
                       className={styles.serviceCard}
                       key={service.title}
                       variants={cardAnimation}
-                      whileHover={{
-                        y: -8,
-                        transition: {
-                          duration: 0.25,
-                          ease: "easeOut",
-                        },
-                      }}
+                      whileHover={{ y: -6 }}
                     >
                       <div className={styles.serviceIcon} aria-hidden="true">
                         <Icon size={25} />
                       </div>
-
                       <h3>{service.title}</h3>
-
                       <p>{service.description}</p>
-
                       <Link to="/login" className={styles.serviceLink}>
-                        Explore banking
+                        Sign in to explore
                         <ArrowRight size={16} />
                       </Link>
                     </motion.article>
@@ -455,42 +453,60 @@ function Home() {
           </section>
 
           {/* WHY ORVEXABANK */}
-
           <section className={styles.whySection} id="about">
             <div className={styles.whyContainer}>
               <motion.div
                 className={styles.whyVisual}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
-                variants={fadeUp}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.6 }}
               >
+                <div className={styles.whyOrb} aria-hidden="true" />
+
                 <div className={styles.whyCard}>
                   <div className={styles.whyCardTop}>
-                    <div className={styles.previewLogo}>N</div>
-                    <span>ORVEXABANK</span>
+                    <div className={styles.whyBrand}>
+                      <img src="/favicon.png" alt="" aria-hidden="true" />
+                      <span>ORVEXABANK</span>
+                    </div>
+                    <ShieldCheck size={21} />
                   </div>
 
                   <div className={styles.whyCardContent}>
                     <span>YOUR FINANCES</span>
                     <div className={styles.whyCardTitle}>
-                      One experience.
+                      Clarity for your
                       <br />
-                      More possibilities.
+                      everyday banking.
                     </div>
+                    <div className={styles.whyCardLine} />
                   </div>
 
                   <div className={styles.whyCardBottom}>
-                    <span>Digital Banking</span>
-                    <ShieldCheck size={23} />
+                    <span>Digital banking experience</span>
+                    <span className={styles.whyCardDots}>•••• 2026</span>
                   </div>
                 </div>
 
                 <div className={styles.whyStat}>
-                  <LockKeyhole size={21} />
+                  <div className={styles.whyStatIcon}>
+                    <LockKeyhole size={20} />
+                  </div>
                   <div>
                     <strong>Security focused</strong>
                     <span>Designed with account protection in mind</span>
+                  </div>
+                  <CheckCircle2 size={18} className={styles.whyStatCheck} />
+                </div>
+
+                <div className={styles.whyMiniCard}>
+                  <div className={styles.whyMiniIcon}>
+                    <ChartNoAxesCombined size={18} />
+                  </div>
+                  <div>
+                    <strong>Stay informed</strong>
+                    <span>Account activity at a glance</span>
                   </div>
                 </div>
               </motion.div>
@@ -500,7 +516,7 @@ function Home() {
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.25 }}
               >
                 <motion.span
                   className={styles.sectionEyebrow}
@@ -516,7 +532,7 @@ function Home() {
 
                 <motion.p variants={fadeUp}>
                   Your financial activities deserve a simple, transparent and
-                  convenient experience. Orvexabank brings your everyday banking
+                  convenient experience. OrvexaBank brings everyday banking
                   essentials together in one place.
                 </motion.p>
 
@@ -524,21 +540,21 @@ function Home() {
                   className={styles.featureList}
                   variants={staggerContainer}
                 >
-                  {features.map((feature) => (
+                  {benefits.map((benefit) => (
                     <motion.div
                       className={styles.featureItem}
-                      key={feature}
+                      key={benefit}
                       variants={fadeUp}
                     >
                       <CheckCircle2 size={19} />
-                      <span>{feature}</span>
+                      <span>{benefit}</span>
                     </motion.div>
                   ))}
                 </motion.div>
 
                 <motion.div variants={fadeUp}>
                   <Link to="/register" className={styles.primaryBtn}>
-                    Get Started
+                    Get started
                     <ArrowRight size={18} />
                   </Link>
                 </motion.div>
@@ -546,57 +562,77 @@ function Home() {
             </div>
           </section>
 
-          {/* SECURITY SECTION */}
-
-          <section className={styles.securitySection}>
-            <motion.div
-              className={styles.securityContainer}
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
-            >
-              <motion.div className={styles.securityIcon} variants={fadeUp}>
-                <ShieldCheck size={34} />
-              </motion.div>
-
-              <motion.div variants={fadeUp}>
+          {/* SECURITY */}
+          <section
+            className={styles.securitySection}
+            aria-labelledby="security-heading"
+          >
+            <div className={styles.securityContainer}>
+              <motion.div
+                className={styles.securityHeading}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
+                <div className={styles.securityIcon}>
+                  <ShieldCheck size={32} />
+                </div>
                 <span className={styles.sectionEyebrow}>
                   SECURITY AND CONTROL
                 </span>
-                <h2>Your banking experience deserves protection.</h2>
+                <h2 id="security-heading">
+                  Your banking experience deserves protection.
+                </h2>
                 <p>
                   Access your account through authenticated sessions and stay
                   informed about important account activities.
                 </p>
               </motion.div>
 
-              <motion.div className={styles.securityFeatures} variants={fadeUp}>
-                <div>
-                  <LockKeyhole />
-                  <span>Secure authentication</span>
-                </div>
-                <div>
-                  <Bell />
-                  <span>Account activity updates</span>
-                </div>
-                <div>
-                  <Smartphone />
-                  <span>Convenient digital access</span>
-                </div>
+              <motion.div
+                className={styles.securityGrid}
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+              >
+                {securityFeatures.map((feature) => {
+                  const Icon = feature.icon;
+
+                  return (
+                    <motion.article
+                      className={styles.securityCard}
+                      key={feature.title}
+                      variants={cardAnimation}
+                      whileHover={{ y: -5 }}
+                    >
+                      <div className={styles.securityCardIcon}>
+                        <Icon size={23} />
+                      </div>
+                      <h3>{feature.title}</h3>
+                      <p>{feature.description}</p>
+                    </motion.article>
+                  );
+                })}
               </motion.div>
-            </motion.div>
+
+              <p className={styles.securityNote}>
+                Security features depend on the services and controls enabled
+                in your account.
+              </p>
+            </div>
           </section>
 
           {/* FINAL CTA */}
-
           <section className={styles.ctaSection}>
+            <div className={styles.ctaGlow} aria-hidden="true" />
             <motion.div
               className={styles.ctaContent}
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.4 }}
+              viewport={{ once: true, amount: 0.35 }}
             >
               <motion.span variants={fadeUp}>
                 YOUR NEXT CHAPTER STARTS HERE
@@ -609,13 +645,13 @@ function Home() {
               </motion.h2>
 
               <motion.p variants={fadeUp}>
-                Get started with Orvexabank and explore a more convenient way to
-                manage your finances.
+                Get started with OrvexaBank and explore a more convenient way
+                to manage your finances.
               </motion.p>
 
               <motion.div variants={fadeUp}>
                 <Link to="/register" className={styles.ctaButton}>
-                  Open Your Account
+                  Open your account
                   <ArrowRight size={18} />
                 </Link>
               </motion.div>

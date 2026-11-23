@@ -16,12 +16,16 @@ import { motion } from "motion/react";
 
 import styles from "./Login.module.css";
 import { authService } from "../../../services/authservice";
+import { setAuthenticated } from "../../../store/authSlice";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../../store/store";
 
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
- 
+  const dispatch = useDispatch<AppDispatch>();
+
   const [username, setUsername] = useState(
     () => localStorage.getItem("rememberedUsername") || "",
   );
@@ -62,7 +66,6 @@ function Login() {
     return valid;
   };
 
-
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -74,24 +77,24 @@ function Login() {
       setLoading(true);
       setError("");
 
-
       await authService.login({
         loginId: username.trim(),
         password,
       });
 
-console.log("Access Token Exists:", !!tokenManager.getAccessToken());
-console.log("Refresh Token Exists:", !!tokenManager.getRefreshToken());
-
-
+      console.log("Access Token Exists:", !!tokenManager.getAccessToken());
+      console.log("Refresh Token Exists:", !!tokenManager.getRefreshToken());
+      
       if (rememberMe) {
         localStorage.setItem("rememberedUsername", username.trim());
       } else {
         localStorage.removeItem("rememberedUsername");
       }
+       dispatch(setAuthenticated(true));
 
 
       navigate(from, { replace: true });
+
     } catch (err) {
       authService.logout();
 
@@ -116,7 +119,6 @@ console.log("Refresh Token Exists:", !!tokenManager.getRefreshToken());
 
   return (
     <div className={styles.loginPage}>
- 
       <motion.section
         className={styles.loginSection}
         initial={{ opacity: 0, x: -25 }}
@@ -261,7 +263,6 @@ console.log("Refresh Token Exists:", !!tokenManager.getRefreshToken());
           </p>
         </div>
       </motion.section>
-
 
       <motion.aside
         className={styles.brandSection}
