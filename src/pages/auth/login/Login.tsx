@@ -83,7 +83,6 @@ function Login() {
       });
 
       console.log("Access Token Exists:", !!tokenManager.getAccessToken());
-      console.log("Refresh Token Exists:", !!tokenManager.getRefreshToken());
       
       if (rememberMe) {
         localStorage.setItem("rememberedUsername", username.trim());

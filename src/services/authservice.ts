@@ -1,3 +1,4 @@
+
 import axiosInstance from "./api/axiosInstance";
 import tokenManager from "./tokenManager";
 
@@ -8,7 +9,6 @@ export interface LoginRequest {
 
 export interface LoginResponse {
     accessToken: string;
-    refreshToken: string;
     tokenType: string;
     expiresIn: number;
 }
@@ -24,33 +24,49 @@ export interface RegisterRequest {
 
 export const authService = {
 
+    // Login
     async login(credentials: LoginRequest): Promise<LoginResponse> {
+
         const response = await axiosInstance.post<LoginResponse>(
             "/auth/login",
-            credentials
+            credentials,
+            {
+                withCredentials: true,
+            }
         );
 
         const data = response.data;
-        tokenManager.setTokens(
-            data.accessToken,
-            data.refreshToken
-        );
+
+        tokenManager.setAccessToken(data.accessToken);
 
         return data;
     },
 
+    // Logout
+    async logout(): Promise<void> {
 
-
-    logout(): void {
-        tokenManager.clearTokens();
+        try {
+            await axiosInstance.post(
+                "/auth/logout",
+                {},
+                {
+                    withCredentials: true,
+                }
+            );
+        } finally {
+            // Clear access token from frontend memory
+            tokenManager.clearTokens();
+        }
     },
 
+    // Register
     async register(data: RegisterRequest) {
-    const response = await axiosInstance.post(
-        "auth/public/register",
-        data
-    );
 
-    return response.data;
-},
+        const response = await axiosInstance.post(
+            "/auth/public/register",
+            data
+        );
+
+        return response.data;
+    },
 };

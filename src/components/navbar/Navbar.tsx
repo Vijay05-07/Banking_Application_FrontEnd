@@ -113,7 +113,7 @@ function Navbar() {
         return () => {
             window.removeEventListener("hashchange", handleHashChange);
         };
-    }, [location.pathname]);
+    }, [location.pathname, location.hash]);
 
     useEffect(() => {
         const closeOnWideScreen = () => {

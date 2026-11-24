@@ -49,7 +49,7 @@ function Footer() {
                     <div className={styles.footerBrand}>
 
                         <Link
-                            to="/"
+                            to="/#home"
                             className={styles.footerLogo}
                             aria-label="OrvexaBank home"
                         >
@@ -178,13 +178,13 @@ function Footer() {
                         All rights reserved.
                     </p>
 
-                    <Link
-                        to="/#home"
+                    <a
+                        href="#home"
                         className={styles.footerBackTop}
                     >
                         Back to top
                         <ArrowUpRight size={16} />
-                    </Link>
+                    </a>
 
                 </motion.div>
 

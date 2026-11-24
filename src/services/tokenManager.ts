@@ -1,18 +1,16 @@
+
 let accessToken: string | null = null;
-let refreshToken: string | null = null;
 
 const tokenManager = {
-  setTokens: (access: string, refresh: string) => {
-    accessToken = access;
-    refreshToken = refresh;
-  },
-  getAccessToken: () => accessToken,
-  getRefreshToken: () => refreshToken,
+    setAccessToken: (access: string) => {
+        accessToken = access;
+    },
 
-  clearTokens: () => {
-    accessToken = null;
-    refreshToken = null;
-  },
+    getAccessToken: () => accessToken,
+
+    clearTokens: () => {
+        accessToken = null;
+    },
 };
 
 export default tokenManager;
