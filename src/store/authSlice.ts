@@ -12,11 +12,13 @@ interface authUser{
 
 interface authState {
     isAuthenticated: boolean;
+    isInitialized: boolean;
     user: authUser | null;
 }
 
 const initialState: authState = {
     isAuthenticated: false,
+    isInitialized: false,
     user: null,
 };
 
@@ -26,15 +28,20 @@ const authSlice = createSlice({
     reducers: {
         setAuthenticated: (state, action: PayloadAction<boolean>) => {
             state.isAuthenticated = action.payload;
+            state.isInitialized = true;
+        },
+        authCheckCompleted: (state) => {
+            state.isInitialized = true;
         },
         logout: (state) => {
             state.isAuthenticated = false;
+            state.isInitialized = true;
             state.user = null;
             tokenManager.clearTokens(); 
         }
     },
 });
 
-export const {setAuthenticated, logout } = authSlice.actions;
+export const {setAuthenticated, authCheckCompleted, logout } = authSlice.actions;
 
 export default authSlice.reducer;

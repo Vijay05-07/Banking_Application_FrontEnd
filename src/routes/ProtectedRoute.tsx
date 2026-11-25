@@ -8,8 +8,15 @@ const ProtectedRoute = () => {
     const isAuthenticated = useSelector(
         (state: RootState) => state.auth.isAuthenticated
     );
+    const isInitialized = useSelector(
+        (state: RootState) => state.auth.isInitialized
+    );
 
     const location = useLocation();
+
+    if (!isInitialized) {
+        return <div role="status" aria-live="polite">Checking your session...</div>;
+    }
 
     if (!isAuthenticated) {
         return (

@@ -1,5 +1,5 @@
 
-import axiosInstance from "./api/axiosInstance";
+import axiosInstance, { restoreSession as refreshSession } from "./api/axiosInstance";
 import tokenManager from "./tokenManager";
 
 export interface LoginRequest {
@@ -24,20 +24,21 @@ export interface RegisterRequest {
 
 export const authService = {
 
+    async restoreSession(): Promise<void> {
+        await refreshSession();
+    },
+
     // Login
     async login(credentials: LoginRequest): Promise<LoginResponse> {
-
         const response = await axiosInstance.post<LoginResponse>(
             "/auth/login",
             credentials,
-            {
-                withCredentials: true,
-            }
+            { withCredentials: true }
         );
 
         const data = response.data;
 
-        tokenManager.setAccessToken(data.accessToken);
+        tokenManager.startSession(data.accessToken);
 
         return data;
     },
@@ -45,23 +46,21 @@ export const authService = {
     // Logout
     async logout(): Promise<void> {
 
+        tokenManager.clearTokens();
+
         try {
             await axiosInstance.post(
                 "/auth/logout",
                 {},
-                {
-                    withCredentials: true,
-                }
+                { withCredentials: true }
             );
         } finally {
-            // Clear access token from frontend memory
             tokenManager.clearTokens();
         }
     },
 
     // Register
     async register(data: RegisterRequest) {
-
         const response = await axiosInstance.post(
             "/auth/public/register",
             data
